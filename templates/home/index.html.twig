@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% form_theme login_form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Save Database{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}} 
+    <meta property="og:image" content="https://4ace-191-250-74-33.ngrok-free.app/build/images/php-symfony-mysql-sample.jpg"/>
+    <meta property="og:url" content="www.stock.com"/>
+{% endblock %}
+
+{% block body %}
+    <div class="login">
+        {{ form(login_form) }}
+    </div>
+{% endblock %}
