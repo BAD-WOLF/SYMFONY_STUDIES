@@ -1,0 +1,56 @@
+// assets/styles/global.scss
+
+// customize some Bootstrap variables
+$primary: darken(#428bca, 20%);
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
+
+body { 
+  display: flex;
+  background-image: url("../images_to_images/images/modular-symfony-development-igniti-en.png");
+  background-size: 50pt 50pt;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+}
+
+@keyframes color-change {
+  0% {
+    background-color: gray;
+  }
+  25% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: green;
+  }
+  75% {
+    background-color: pink;
+  }
+  100% {
+    background-color: cyan;
+  }
+}
+
+
+body {
+  animation: color-change 5s infinite; 
+}
+
+.login {
+  display: flex;
+  background-image: url("../images_to_images/images/quadro-poster-paisagem-04-detalhes-abaixo-para-imprimir.jpg");
+  width: 50%;
+  height: 50%; 
+  border-radius: 50%; 
+  justify-content: center;
+  align-items: center;
+}
+
+
