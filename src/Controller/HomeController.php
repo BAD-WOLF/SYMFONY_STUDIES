@@ -1,47 +1,83 @@
 <?php
+
 namespace App\Controller;
 
-use App\Entity\Login;
-use App\Form\LoginType;
+use App\Entity\Produto;
+use App\Form\ProdutoType;
+use App\Repository\ProdutoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class HomeController extends AbstractController 
+#[IsGranted("ROLE_USER")]
+#[Route('/home')]
+class HomeController extends AbstractController
 {
-    #[Route(path:"/", name:"home", methods:["GET", "POST"])]
-    public function index(Request $request, EntityManagerInterface $db): Response
+    #[Route('/', name: 'app_home_index', methods: ['GET'])]
+    public function index(ProdutoRepository $produtoRepository): Response
     {
-        try {
-            /*
-            $login = new login;
-            $login->setDescription("This is a symfony project in progress");
-            $login->setName("matheu");
-            $login->setEmail("matheusviaira160@gmail.com");
-            $login->setPasswd(password_hash("ratak1413", PASSWORD_BCRYPT));
-            $db->persist($login);
-            $db->flush();
-             */
+        return $this->render('home/index.html.twig', [
+            'produtos' => $produtoRepository->findAll(),
+        ]);
+    }
 
-            $login_form = $this->createForm(LoginType::class);
+    #[Route('/new', name: 'app_home_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $produto = new Produto();
+        $form = $this->createForm(ProdutoType::class, $produto);
+        $form->handleRequest($request);
 
-            $login_form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($produto);
+            $entityManager->flush();
 
-            if ($login_form->isSubmitted() && $login_form->isValid()) {
-                $db->persist($login_form->getData());
-                $db->flush();
-            }
-            return $this->render(view:"home/index.html.twig", parameters:[
-                "login_form" => $login_form
-            ], response:new Response(status:Response::HTTP_OK));
-        } catch (\Exception $th) {
-            // throw $th;
-            return $this->render(view:"error/index.html.twig", parameters:[
-                "description" => $th->getMessage()
-            ], response:new Response(status:Response::HTTP_INTERNAL_SERVER_ERROR));
+            return $this->redirectToRoute('app_home_index', [], Response::HTTP_SEE_OTHER);
         }
+
+        return $this->render('home/new.html.twig', [
+            'produto' => $produto,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_home_show', methods: ['GET'])]
+    public function show(Produto $produto): Response
+    {
+        return $this->render('home/show.html.twig', [
+            'produto' => $produto,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_home_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Produto $produto, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ProdutoType::class, $produto);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_home_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('home/edit.html.twig', [
+            'produto' => $produto,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_home_delete', methods: ['POST'])]
+    public function delete(Request $request, Produto $produto, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$produto->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($produto);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_home_index', [], Response::HTTP_SEE_OTHER);
     }
 }
-?>
