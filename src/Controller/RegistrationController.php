@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\ReverifyType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -93,5 +94,36 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_login');
+    }
+
+    #[Route("/send-reverify", "app_reverify")]
+    public function reverify(Request $request, UserRepository $userRepository) {
+        if ($this->getUser()) {
+            return $this->redirectToRoute("app_home_index");
+        }
+
+        $form = $this->createForm(ReverifyType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->findOneBy(["email" => $form->get("email")->getData()]);
+            if ($user) {
+                $this->emailVerifier->sendEmailConfirmation(
+                    "app_verify_email",
+                    $user,
+                    (new TemplatedEmail())
+                    ->from(new Address("matheusviaira160@gmail.com"))
+                    ->to($user->getEmail())
+                    ->subject("Matheus Vieira")
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
+                return $this->redirectToRoute("app_login");
+            } else {
+                $this->addFlash("error", "Incorrect Email");
+            }
+        }
+        return $this->render("registration/reverify.html.twig", [
+            "reverifyForm" => $form
+        ]);
     }
 }

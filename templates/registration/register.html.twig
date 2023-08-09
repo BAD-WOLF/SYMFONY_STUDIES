@@ -37,7 +37,9 @@
                     {{ form_row(registrationForm.submit) }}
                 </div>
             </div>
-            <a class="forgot btn btn-secondary" href={{ path("app_login") }}>Return to login</a>
+            <a class="btn btn-outline-success" href={{ path("app_login") }}>Return to login</a>
+            <a class="forgot btn btn-outline-secondary" href={{ path("app_reverify", parameters = []) }}>Reques a new verification email</a>
         {{ form_end(registrationForm) }}
+
     </div>
 {% endblock %}
