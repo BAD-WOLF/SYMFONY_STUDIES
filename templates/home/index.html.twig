@@ -3,6 +3,13 @@
 {% block title %}Produto index{% endblock %}
 
 {% block body %}
+
+    {% if app.user %}
+        <div class="mb-3 logout">
+            You are logged in as {{ app.user.userIdentifier }}, <a href={{ path('app_logout') }}>Logout</a>
+        </div>
+    {% endif %}
+
     <h1>Produto index</h1>
 
     <table class="table">
@@ -23,8 +30,8 @@
                 <td>{{ produto.amount }}</td>
                 <td>{{ produto.datetime ? produto.datetime|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_home_show', {'id': produto.id}) }}">show</a>
-                    <a href="{{ path('app_home_edit', {'id': produto.id}) }}">edit</a>
+                    <a href={{ path('app_home_show', {'id': produto.id}) }}>show</a>
+                    <a href={{ path('app_home_edit', {'id': produto.id}) }}>edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,7 +40,10 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table>    
 
-    <a href="{{ path('app_home_new') }}">Create new</a>
+    {% if app.user %}
+        <a href={{ path('app_home_new') }}><button class="btn btn-outline-success-">Create new</button></a>
+    {% endif %}
+
 {% endblock %}
