@@ -4,13 +4,16 @@
 
 {% block body %}
 
-    {% if app.user %}
-        <div class="mb-3 logout">
-            You are logged in as {{ app.user.userIdentifier }}, <a href={{ path('app_logout') }}>Logout</a>
-        </div>
-    {% endif %}
 
     <h1>Produto index</h1>
+    {% if app.user %}
+        <div class="mb-3 logout">
+            You are logged in as {{ app.user.userIdentifier }}, <a href={{ path('app_logout') }}>Logout?</a>
+        </div>
+    {% else %}
+        Register to more privileges:</br>
+        <a href={{ path("app_login", parameters = []) }}> <button>Go to login</button> </a>
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -30,8 +33,14 @@
                 <td>{{ produto.amount }}</td>
                 <td>{{ produto.datetime ? produto.datetime|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href={{ path('app_home_show', {'id': produto.id}) }}>show</a>
-                    <a href={{ path('app_home_edit', {'id': produto.id}) }}>edit</a>
+                    <div class="left-end">
+                    <a href={{ path('app_home_show', {'id': produto.id}) }}> <button class="btn btn-outline-info">show</button> </a>
+                    {% if app.user %}
+                        {% if app.user.roles.0 in ["ROLE_NORMAL_USER", "ROLE_ADMIN"] %}
+                            <a href={{ path('app_home_edit', {'id': produto.id}) }}> <button class="btn btn-outline-dark">edit</button> </a> 
+                        {% endif %}
+                    {% endif %}
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -43,7 +52,12 @@
     </table>    
 
     {% if app.user %}
-        <a href={{ path('app_home_new') }}><button class="btn btn-outline-success-">Create new</button></a>
+        {% if app.user.roles.0 == "ROLE_ADMIN" %}
+            <a href={{ path('app_home_new') }}><button class="btn btn-outline-success-">Create new</button></a>
+        {% elseif app.user.roles.0 == "ROLE_NORMAL_USER" %}
+            you can become admin for more privileges: </br>
+            <a href={{ path("app_register", {'role':'admin'}) }}><button class="btn btn-outline-success">Go to admin regiser</button></a>
+        {% endif %}
     {% endif %}
 
 {% endblock %}
