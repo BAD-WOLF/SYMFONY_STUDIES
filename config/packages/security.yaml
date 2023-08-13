@@ -34,10 +34,14 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+   
+    role_hierarchy:
+        ROLE_ADMIN: ["ROLE_NORMAL_USER"]
+   
     access_control:
-        - { path: ^/(new|delete),          roles: ROLE_ADMIN }
-        - { path: ^/(edit|register/admin), roles: ROLE_NORMAL_USER }
-        - { path: ^/(home|show),           roles: PUBLIC_ACCESS }
+        - { path: ^/(edit|verify/email/admin), roles: ROLE_NORMAL_USER }
+        - { path: ^/(new|delete),              roles: ROLE_ADMIN }
+        - { path: ^/(home|show),               roles: PUBLIC_ACCESS }
 
 when@test:
     security:
