@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pessoas{% endblock %}
+
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('new_app') }}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('new_app') }}
+{% endblock %}
+
+{% block body %}
+    
+    <h1>Create new Pessoas</h1>
+
+    {{ include('pessoas/_form.html.twig') }}
+
+    <a href="{{ path('app_pessoas_index') }}">back to list</a>
+
+{% endblock %}
