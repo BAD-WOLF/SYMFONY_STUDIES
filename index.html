@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formatação de CPF em Tempo Real</title>
+</head>
+<body>
+    <input type="text" class="cpf" placeholder="CPF" id="cpfInput">
+    
+    <script>
+        // Seleciona o elemento de entrada pelo ID
+        var cpfInput = document.getElementById('cpfInput');
+
+        // Adiciona um event listener para o evento input
+        cpfInput.addEventListener('onblur', function() {
+            FormataCPF(this);
+        });
+
+        function FormataCPF(input) {
+            var cpf = input.value.replace(/\D/g, '');
+
+            if (cpf.length <= 11) {
+                cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            } else {
+                cpf = cpf.slice(0, 11); // Limita a 11 dígitos (para evitar caracteres extras)
+                cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
+            }
+
+            input.value = cpf;
+        }
+    </script>
+</body>
+</html>
+
