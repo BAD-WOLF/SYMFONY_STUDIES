@@ -10,7 +10,8 @@ Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     .copyFiles({
-        from: "./assets/images_to_images"
+        from: "./assets/images_to_images",
+        //to: "./public/build/images"
     })
     // public path used by the web server to access the output path
     .setPublicPath('/build')
@@ -26,6 +27,7 @@ Encore
     .addEntry('register_app', './assets/apps/register/app.js')
     .addEntry('global_app', './assets/globalApp.js')
     .addEntry("login_app", "./assets/apps/login/app.js")
+    .addEntry("new_app", "./assets/apps/new/app.js")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

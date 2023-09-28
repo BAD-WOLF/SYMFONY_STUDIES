@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pessoas index{% endblock %}
+
+{% block body %}
+    <h1>Pessoas index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cpf</th>
+                <th>Nome</th>
+                <th>Nascimento</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pessoa in pessoas %}
+            <tr>
+                <td>{{ pessoa.id }}</td>
+                <td>{{ pessoa.cpf }}</td>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.nascimento ? pessoa.nascimento|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_pessoas_show', {'id': pessoa.id}) }}">show</a>
+                    <a href="{{ path('app_pessoas_edit', {'id': pessoa.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pessoas_new') }}">Create new</a>
+{% endblock %}
