@@ -2,10 +2,21 @@
 
 {% block title %}Pessoas index{% endblock %}
 
-{% block body %}
-    <h1>Pessoas index</h1>
 
-    <table class="table">
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('index_app') }}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('index_app') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Pessoas index</h1><input id="search" placeholder="cpf, nome ou data ..."/>
+    <table class="table" id="pessoas-table">
         <thead>
             <tr>
                 <th>Id</th>

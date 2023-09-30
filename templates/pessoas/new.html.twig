@@ -2,15 +2,16 @@
 
 {% block title %}New Pessoas{% endblock %}
 
-
 {% block stylesheets %}
+    {{ parent() }}
     {{ encore_entry_link_tags('new_app') }}
 {% endblock %}
 
-
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('new_app') }}
 {% endblock %}
+
 
 {% block body %}
     
