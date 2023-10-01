@@ -169,7 +169,7 @@ class RegistrationController extends AbstractController
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      * @return void
      */
-    #[Route(path: "/charge-to-admin", name: "app_charge_to_admin")]
+    #[Route(path: "/change-to-admin", name: "app_change_to_admin")]
     public function ChargeToAdmin(UserInterface $user, EntityManagerInterface $entityManager): Response
     {
         
@@ -187,6 +187,6 @@ class RegistrationController extends AbstractController
             ->subject("Matheus Vieira")
             ->htmlTemplate('registration/confirmation_email.html.twig')
         );
-        return new Response("success");
+        return new Response("foi enviado um email com sua solicitacao ao admin chefe 😎");
     }
 }
