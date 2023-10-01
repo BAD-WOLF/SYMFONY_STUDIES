@@ -14,7 +14,7 @@ class Pessoas
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 14)]
+    #[ORM\Column(length: 14, unique: true, options: ["min_length" => 14])]
     private ?string $cpf = null;
 
     #[ORM\Column(length: 255)]
