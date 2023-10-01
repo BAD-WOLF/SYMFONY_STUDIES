@@ -41,7 +41,7 @@ class PessoasController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_pessoas_show', methods: ['GET'])]
+    #[Route('show/{id}', name: 'app_pessoas_show', methods: ['GET'])]
     public function show(Pessoas $pessoa): Response
     {
         return $this->render('pessoas/show.html.twig', [
@@ -49,7 +49,7 @@ class PessoasController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_pessoas_edit', methods: ['GET', 'POST'])]
+    #[Route('edit/{id}', name: 'app_pessoas_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Pessoas $pessoa, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PessoasType::class, $pessoa);
@@ -67,7 +67,7 @@ class PessoasController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_pessoas_delete', methods: ['POST'])]
+    #[Route('delete/{id}', name: 'app_pessoas_delete', methods: ['POST'])]
     public function delete(Request $request, Pessoas $pessoa, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$pessoa->getId(), $request->request->get('_token'))) {

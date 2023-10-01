@@ -1,0 +1,25 @@
+body {
+    background-color: lightgray;
+
+    input {
+        float: right;
+        width: 25%;
+        border-style: solid;
+        border-width: medium;
+        border-top-color: yellow;
+        border-right-color: purple;
+        border-bottom-color: red;
+        border-left-color: blue;
+        border-end-end-radius: 50%;
+    }
+
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    #action, #show-edit {
+      display: flex;
+      justify-content: end;
+    }
+}

@@ -28,6 +28,8 @@ Encore
     .addEntry('global_app', './assets/globalApp.js')
     .addEntry("login_app", "./assets/apps/login/app.js")
     .addEntry("new_app", "./assets/apps/new/app.js")
+    .addEntry("index_app", "./assets/apps/index/app.js")
+    .addEntry("edit_app", "./assets/apps/edit/app.js")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
