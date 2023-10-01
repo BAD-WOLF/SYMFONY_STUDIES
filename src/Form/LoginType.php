@@ -37,6 +37,7 @@ class LoginType extends AbstractType
             ])
             ->add('passwd', PasswordType::class, [
                 'label' => 'Senha: ',
+                'toggle' => true,
                 'attr' => [
                     'placeholder' => 'Digite a senha aqui...'
                 ],

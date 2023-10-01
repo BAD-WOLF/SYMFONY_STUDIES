@@ -4,16 +4,22 @@ body {
     input {
         float: right;
         width: 25%;
-        border-style: double;
-        border-top: 3px solid yellow;
-        border-right: 3px solid purple;
-        border-bottom: 3px solid red;
-        border-left: 3px solid blue;
+        border-style: solid;
+        border-width: medium;
+        border-top-color: yellow;
+        border-right-color: purple;
+        border-bottom-color: red;
+        border-left-color: blue;
         border-end-end-radius: 50%;
     }
 
     h1 {
         display: flex;
         justify-content: center;
+    }
+
+    #action, #show-edit {
+      display: flex;
+      justify-content: end;
     }
 }
