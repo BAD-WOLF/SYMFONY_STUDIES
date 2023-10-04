@@ -28,6 +28,9 @@ web:
             expires: 1h
             passthru: "/index.php"
 
+relationships:
+    database: 'database:mysql'
+
 workers:
     messenger:
         # PHP background workers usually don't require much CPU. See
