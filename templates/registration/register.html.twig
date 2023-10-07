@@ -11,6 +11,11 @@
 {% endblock %}
 
 {% block body %}
+    <audio id="minhaMusica" autoplay>
+        <source src={{ asset("build/music/grave.mp3") }} type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
     <div class="register">
         {% for flash_error in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>

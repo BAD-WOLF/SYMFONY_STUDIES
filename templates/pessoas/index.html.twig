@@ -16,6 +16,10 @@
 
 {% block body %}
     <h1>Pessoas index</h1>
+    <audio id="minhaMusica" autoplay>
+        <source src={{ asset("build/music/disney.mp3") }} type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
     {% if app.user %}
         <div class="profile-container">
             <img src={{asset("build/images/cat_perfil.jpeg")}} alt="Perfil" class="profile-image" id="profile-image">
