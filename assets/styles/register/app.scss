@@ -46,7 +46,11 @@ body {
 
 
 body {
-  animation: img-change 40s infinite; 
+  animation: img-change 40s infinite;
+  #registration_form_submit {
+    position: relative;
+    width: 100%;
+  }
 }
 
 
