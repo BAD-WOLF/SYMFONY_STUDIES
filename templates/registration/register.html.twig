@@ -35,14 +35,10 @@
             {{ form_row(registrationForm.plainPassword, {
                 label: 'Password'
             }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
             <div class="container">
-            <div class="row justify-content-center mt-5">
-                <div class="col-12 text-center">
-                    {{ form_row(registrationForm.submit) }}
-                </div>
-            </div>
-            <a class="btn btn-outline-success" href={{ path("app_login") }}>Return to login</a>
+            {{ form_row(registrationForm.submit) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <a class="btn btn-outline-primary" href={{ path("app_login") }}>Return to login</a>
             <a class="forgot btn btn-outline-secondary" href={{ path("app_reverify", parameters = []) }}>Reques a new verification email</a>
         {{ form_end(registrationForm) }}
 
