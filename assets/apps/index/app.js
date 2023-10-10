@@ -1,6 +1,12 @@
 import "../../styles/index/app.scss";
+import $ from "jquery";
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    $("#profile-image").click(function() {
+        $("#menu").toggle("slow");
+    });
+
     const searchInput = document.getElementById("search");
     const table = document.getElementById("pessoas-table");
     const rows = table.querySelectorAll("tbody tr");

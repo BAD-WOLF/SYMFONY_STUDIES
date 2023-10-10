@@ -1,25 +1,74 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 
-    input {
-        float: right;
-        width: 25%;
-        border-style: solid;
-        border-width: medium;
-        border-top-color: yellow;
-        border-right-color: purple;
-        border-bottom-color: red;
-        border-left-color: blue;
-        border-end-end-radius: 50%;
-    }
 
-    h1 {
-        display: flex;
-        justify-content: center;
-    }
+  .profile-container {
+    position: absolute;
+    top:0;
+    right: 0;
+    /* Para posicionar no canto superior direito */
+    transform: translate(50%, 0);
+  }
 
-    #action, #show-edit {
-      display: flex;
-      justify-content: end;
+  .profile-image {
+    width: 30%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.50);
     }
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 120%;
+    /* Posição abaixo da imagem de perfil */
+    right: 75%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    opacity: 75%;
+    transform: translateY(-10px);
+
+    a {
+      text-decoration: none;
+      color: #333;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  input {
+    float: right;
+    width: 25%;
+    border-style: solid;
+    border-width: medium;
+    border-top-color: yellow;
+    border-right-color: purple;
+    border-bottom-color: red;
+    border-left-color: blue;
+    border-end-end-radius: 50%;
+  }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  #action,
+  #show-edit {
+    display: flex;
+    justify-content: end;
+  }
 }
